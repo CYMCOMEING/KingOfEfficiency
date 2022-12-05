@@ -25,7 +25,7 @@ class SQLGenerator():
             keys = keys[:-1]
             parm = parm[:-1]
         
-        sql = "insert into {} ({}) value ({})".format(table, keys, parm)
+        sql = "insert into {} ({}) values ({});".format(table, keys, parm)
         return sql, values
 
 
