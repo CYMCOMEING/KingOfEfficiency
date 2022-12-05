@@ -15,6 +15,7 @@ class DBManager():
         
         self.table = 'person'  # 默认表
 
+    # 外面调用部分################################
     def data_insert(self, data):
         """
         插入数据到数据库
@@ -50,6 +51,7 @@ class DBManager():
         pass
 
 
+    # 直接操作数据库部分 ########################################
     def get_all_table(self):
         """
         获取所有表名
