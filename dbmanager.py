@@ -22,29 +22,33 @@ class DBManager():
         data: 字典类型，key：字段，value：数据
         """
         sql, parm = sg.get_sql_inster(data, self.table)
-        print(sql)
         self.insert(sql, *parm)
 
-    def data_delete(self, data):
+    def data_delete(self, where_data):
         """
         删除数据
-        data: 字典类型，key：字段，value：数据， where直接使用 == 关系
+        data: 
         """
-        pass
+        sql, parm = sg.get_sql_delete(where_data, self.table)
+        print(sql)
+        print(*parm)
+        self.delet(sql, *parm)
 
     def data_modify(self, data, where_data):
         """
         修改数据
         data: 字典类型，key：字段，value：数据
-        where_data: 字典类型，key：字段，value：数据， where直接使用 == 关系
+        where_data: 字典类型，key：字段，value：数据， where直接使用 = 关系
         """
-        pass
+        sql, parm = sg.get_sql_modify(data, where_data, self.table)
+        
+        self.modify(sql, *parm)
 
     def data_select(self, key_data, where_data):
         """
         查询数据
         key_data：列表，存放字段
-        where_data:字典，where条件，暂时用 == 关系
+        where_data:字典，where条件，暂时用 = 关系
         # TODO 能模糊搜索
         # TODO 能支持*搜索
         """
@@ -110,10 +114,18 @@ class DBManager():
 def test():
     dbm = DBManager("G:\\Project\\KingOfEfficiency\\效率之王.accdb")
     
-    if True:
+    if False:
         # 插入数据
-        data = {"name": 'zhangsan', "age": 18}
-        dbm.data_insert(data)
+        dbm.data_insert({"name": 'zhangsan', "age": 18})
+        dbm.data_insert({"name": 'lisi', "age": 18})
+
+    if False:
+        # 修改数据
+        dbm.data_modify({"age": 20}, ["name", 'zhangsan'])
+
+    if True:
+        # 删除数据
+        dbm.data_delete(["name", "zhangsan"])
 
 if __name__ == "__main__":
     test()
