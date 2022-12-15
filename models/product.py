@@ -18,5 +18,7 @@ class Product(Base):
         )
 
 if __name__ == "__main__":
-    p = Product(id=1, name="交流接触器", parameter="C32", category="电器")
-    print(p)
+    # p = Product(id=1, name="交流接触器", parameter="C32", category="电器")
+    # print(p)
+    print(Product.__tablename__)
+    print()
