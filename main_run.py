@@ -1,24 +1,38 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
+from PyQt5.QtCore import Qt, pyqtSignal
 from ui.Ui_mainpage import Ui_MainWindow
+from addData import AddDataPage
 import sys
 from DBManager import DBManager
 from models.product import Product
 
-class MainPage(QMainWindow, Ui_MainWindow):
+class MainPage(QMainWindow, Ui_MainWindow):    
     def __init__(self, parent=None):
         super(MainPage, self).__init__(parent)
         self.setupUi(self)
 
+        # 绑定增加按钮事件
+        self.btn_add.clicked.connect(self.btn_add_clicked)
+
         self.dbm = DBManager()
         self.show_data()
+
+    def btn_add_clicked(self):
+        # 增加按钮事件函数
+        childDialog = AddDataPage(self)
+        childDialog.get_data_connect(self.add_data) # 子窗口信号绑定
+        childDialog.show()
+
+    def add_data(self, p:Product):
+        # 增加数据到数据库
+        self.dbm.add(p)
 
     
     def show_data(self):
         # 展示数据
         datas = self.dbm.query(Product)
-        header = self.dbm.get_table_columns(Product.__tablename__)
-
+        header = ['id', "产品名", '参数', '分类']
         row_len = len(datas)
         column_len = len(header)
 
