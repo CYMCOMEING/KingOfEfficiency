@@ -1,5 +1,5 @@
 # 效率之王 KingOfEfficiency
-这是一个把Access数据库的数据库快速插入Excel中
+这是一个把Access数据库的数据库,快速插入到Excel中的小工具
 
 # 运行
 先导入相关的库
