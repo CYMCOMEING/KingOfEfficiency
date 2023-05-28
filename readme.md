@@ -2,7 +2,7 @@
 这是一个把Access数据库的数据库快速插入Excel中
 
 # 运行
-想导入相关的库
+先导入相关的库
 ```shell
 pipenv install -r requirements.txt
 ```
